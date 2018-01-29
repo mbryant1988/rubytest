@@ -5,14 +5,10 @@ class StatusesController < ApplicationController
   # GET /statuses.json
   def index
     @statuses = Status.all
-    @singlestatus = Status.new({
-      :title => "Mikes new status",
-      :description => 'descript',
-      :likes => 47,
-      })
-      @singlestatus.save
-      @anotherstatus  = Status.create(title:"one line", description:'one line', likes:9000)
-    
+    @singleStatus = Status.create(title: 'lengthcheck', description:"validation desc", likes: 24)
+    unless @singleStatus.valid?
+      render html: "#{@singleStatus.errors.messages}"
+    end
   end
 
   # GET /statuses/1
